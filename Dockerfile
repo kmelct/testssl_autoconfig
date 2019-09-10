@@ -1,9 +1,7 @@
 FROM drwetter/testssl.sh
 
-RUN ./testssl.sh --quiet --color 0 --jsonfile-pretty=file.json fulcrum.rocks
+COPY . .
 
-RUN cat file.json
+ENTRYPOINT [ "./sslWrapper.sh" ]
 
-ENTRYPOINT [ "cat", "file.json" ]
-
-CMD ["cat", "file.json"]
+CMD ["./sslWrapper.sh"]

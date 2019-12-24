@@ -1,7 +1,18 @@
-FROM drwetter/testssl.sh
+FROM python:alpine
 
-COPY . .
+RUN apk update && apk upgrade
+RUN apk add bash procps drill git coreutils libidn
+RUN apk add --no-cache curl
 
-ENTRYPOINT [ "./sslWrapper.sh" ]
+RUN addgroup testssl
+RUN adduser -G testssl -g "testssl user"  -s /bin/bash -D testssl
 
-CMD ["./sslWrapper.sh"]
+RUN ln -s /home/testssl/testssl.sh /usr/local/bin/
+
+USER testssl
+WORKDIR /home/testssl/
+
+RUN git clone --depth=1 https://github.com/drwetter/testssl.sh.git .
+
+COPY ["/run.py", "/home/testssl/run.py"]
+

@@ -42,7 +42,7 @@ if (len(days) > 0):
       'color': 'red',
       'group': "Online Services Results"
     })
-  else:
+  else if day < 1500:
     res.append({
       'title': 'The certificate will expire', 
       'description': 'The certificate will expire in {} days'.format(day), 

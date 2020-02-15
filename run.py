@@ -22,12 +22,12 @@ for vuln in vulnerabilities:
   	'solution': "Update your ssl certs or contact us for support",
     'status': vuln['severity'].lower().capitalize(),
     'tool': 'testssl.sh',
-    'color': 'yellow',
+    'color': '#ec8b44',
     'group': "Online Services Results"
   })
 
 serverDefaults = result['scanResult'][0]['serverDefaults']
-days = [x for x in serverDefaults if x['id'] == 'cert_validityPeriod']
+days = [x for x in serverDefaults if x['id'] == 'cert_expirationStatus']
 if (len(days) > 0):
   day = int(days[0]['finding'].split(' ')[0])
 
@@ -39,7 +39,7 @@ if (len(days) > 0):
       'status': 'High',
       'tool': 'testssl.sh',
       'position': 'top',
-      'color': 'red',
+      'color': '#ec8b44',
       'group': "Online Services Results"
     })
   elif (day < 1500):
@@ -50,7 +50,7 @@ if (len(days) > 0):
       'status': 'Low',
       'tool': 'testssl.sh',
       'position': 'top',
-      'color': 'yellow',
+      'color': '#ec8b44',
       'group': "Online Services Results"
     })
   
